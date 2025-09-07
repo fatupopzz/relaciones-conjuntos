@@ -12,6 +12,8 @@ from src.validadores import (
     validar_nombre_conjunto, validar_entrada_conjunto, validar_entrada_relacion,
     validar_numero_entero_positivo, validar_opcion_menu, validar_sobrescritura
 )
+from ejemplos.casos_prueba import ejecutar_ejemplos_predefinidos
+
 
 def mostrar_menu_principal():
     """Muestra el menú principal de opciones"""
@@ -114,7 +116,7 @@ def crear_conjunto_interactivo(operador, nombre=None):
     """Crea un conjunto de forma interactiva"""
     if nombre is None:
         nombre = solicitar_entrada_usuario(
-            "Nombre: ",
+            "Nombre del conjunto: ",
             validar_nombre_conjunto
         ).upper()
     
@@ -131,17 +133,18 @@ def crear_conjunto_interactivo(operador, nombre=None):
         if not confirmar_accion(f"{mensaje}. ¿Sobrescribir?"):
             return None
     
-    print("Elementos (ej: a,b,c,1,2):")
+    print("Ingresa los elementos del conjunto separados por comas")
+    print("Ejemplo: a,b,c,1,2,3")
     
     entrada = solicitar_entrada_usuario(
-        "> ",
+        "Elementos: ",
         validar_entrada_conjunto
     )
     
     conjunto = crear_conjunto_desde_entrada(entrada)
     operador.agregar_conjunto(nombre, conjunto)
     
-    print(f"✓ {nombre} creado:")
+    print(f"✓ Conjunto '{nombre}' creado exitosamente:")
     mostrar_conjunto_formateado(conjunto, nombre)
     
     return conjunto
@@ -151,7 +154,7 @@ def crear_relacion_interactiva(operador, nombre=None):
     """Crea una relación de forma interactiva"""
     if nombre is None:
         nombre = solicitar_entrada_usuario(
-            "Nombre: ",
+            "Nombre de la relación: ",
             validar_nombre_conjunto
         ).upper()
     
@@ -168,17 +171,18 @@ def crear_relacion_interactiva(operador, nombre=None):
         if not confirmar_accion(f"{mensaje}. ¿Sobrescribir?"):
             return None
     
-    print("Pares (ej: (1,a),(2,b)):")
+    print("Ingresa los pares ordenados de la relación")
+    print("Ejemplo: (1,a),(2,b),(3,c)")
     
     entrada = solicitar_entrada_usuario(
-        "> ",
+        "Pares ordenados: ",
         validar_entrada_relacion
     )
     
     relacion = crear_relacion_desde_entrada(entrada)
     operador.agregar_relacion(nombre, relacion)
     
-    print(f"✓ {nombre} creada:")
+    print(f"✓ Relación '{nombre}' creada exitosamente:")
     mostrar_relacion_formateada(relacion, nombre)
     
     return relacion
